@@ -1,0 +1,17 @@
+{
+  "points_counter": "Points Counter",
+  "player_one": "Player One",
+  "player_two": "Player Two",
+  "total": "Total",
+  "new_point": "New Point",
+  "points": "Points",
+  "no_route_found": "No Route Found",
+  "are_you_sure": "Are you sure?",
+  "yes": "Yes",
+  "no": "No",
+  "congrats_player1": "Nice one, dude! You should play as player 1 always. :D",
+  "congrats_player2": "Nice Two, dude! Number two ain't always bad , right! xD",
+  "new_game": "New Game?",
+  "reset": "Reset"
+
+}
