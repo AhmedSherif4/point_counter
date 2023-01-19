@@ -20,6 +20,12 @@ dependencies:
   easy_localization: ^3.0.1
   flutter_bloc: ^8.1.1
   bloc: ^8.1.0
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/Points-Grey.png"
 
 dev_dependencies:
   flutter_test:
