@@ -13,7 +13,6 @@ String? _fontFamily = isEnglish ? fontFamilyMontserrat : fontFamilyCairo;
 TextStyle? _getTextStyle = TextStyle(
   fontFamily: _fontFamily,
   fontSize: FontSize.s14,
-//TODO: depending on the dark or light theme
   overflow: TextOverflow.fade,
 );
 
