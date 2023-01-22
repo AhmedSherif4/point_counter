@@ -7,5 +7,3 @@ class AddNewPointForPlayer1 extends PointsState {}
 
 class AddNewPointForPlayer2 extends PointsState {}
 class ResetPoints extends PointsState {}
-
-
