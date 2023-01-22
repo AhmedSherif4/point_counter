@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp> {
     super.didChangeDependencies();
   }
 
-  bool s = false;
 
   @override
   Widget build(BuildContext context) {

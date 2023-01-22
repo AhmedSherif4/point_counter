@@ -25,10 +25,8 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(AppStrings.pointsCounter).tr(),
         actions: [
-          BlocBuilder<AppSettingsCubit, AppSettingsState>(
-              builder: (context, state) {
-            final AppSettingsCubit cubit =
-                BlocProvider.of<AppSettingsCubit>(context);
+          BlocBuilder<AppSettingsCubit, AppSettingsState>(builder: (context, state) {
+            final AppSettingsCubit cubit = BlocProvider.of<AppSettingsCubit>(context);
             return Wrap(
               children: [
                 IconButton(
@@ -39,13 +37,10 @@ class MainScreen extends StatelessWidget {
                     icon: const Icon(Icons.translate_rounded)),
                 IconButton(
                     onPressed: () {
-                      cubit.getThemeMode()
-                          ? cubit.isDark(false)
-                          : cubit.isDark(true);
+                      cubit.getThemeMode() ? cubit.isDark(false) : cubit.isDark(true);
                     },
-                    icon: Icon(cubit.getThemeMode()
-                        ? Icons.dark_mode_rounded
-                        : Icons.light_mode_rounded)),
+                    icon: Icon(
+                        cubit.getThemeMode() ? Icons.dark_mode_rounded : Icons.light_mode_rounded)),
               ],
             );
           }),
@@ -58,9 +53,10 @@ class MainScreen extends StatelessWidget {
           children: [
             Expanded(
               child: totalWidgetsOfAPlayer(
-                  context: context,
-                  controller: textControllerPlayerOne,
-                  isPlayer1: true),
+                context: context,
+                controller: textControllerPlayerOne,
+                isPlayer1: true,
+              ),
             ),
             VerticalDivider(
               width: AppSize.s8,
@@ -78,21 +74,15 @@ class MainScreen extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-      floatingActionButton: BlocBuilder<PointsCubit, PointsState>(
-        builder: (context, state) {
-          return FloatingActionButton(
-            autofocus: true,
-              isExtended: true,
-              onPressed: () => resetDialog(
-                    resetFunction: () =>
-                        context.read<PointsCubit>().resetPoints(context),
-                    context: context,
-                  ),
-              child: const Text(AppStrings.reset));
-        },
+      floatingActionButton: FloatingActionButton(
+        autofocus: true,
+        isExtended: true,
+        onPressed: () => resetDialog(
+          resetFunction: () => context.read<PointsCubit>().resetPoints(context),
+          context: context,
+        ),
+        child: const Text(AppStrings.reset),
       ),
-
     );
   }
 }

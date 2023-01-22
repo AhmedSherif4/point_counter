@@ -20,9 +20,7 @@ Widget totalWidgetsOfAPlayer(
       slivers: [
         SliverToBoxAdapter(
           child: customTextTitle(
-              title: isPlayer1
-                  ? AppStrings.playerOne.tr()
-                  : AppStrings.playerTwo.tr(),
+              title: isPlayer1 ? AppStrings.playerOne.tr() : AppStrings.playerTwo.tr(),
               context: context),
         ),
         SliverToBoxAdapter(
@@ -30,7 +28,7 @@ Widget totalWidgetsOfAPlayer(
             builder: (context, state) {
               return customTextTitle(
                 title:
-                    '${AppStrings.total.tr()}: ${isPlayer1 ? context.read<PointsCubit>().totalPlayer1 : context.read<PointsCubit>().totalPlayer2}',
+                    '${AppStrings.total.tr()}: ${isPlayer1 ? context.watch<PointsCubit>().totalPlayer1 : context.watch<PointsCubit>().totalPlayer2}',
                 context: context,
                 isTotal: true,
               );
@@ -38,46 +36,34 @@ Widget totalWidgetsOfAPlayer(
           ),
         ),
         SliverToBoxAdapter(
-          child: BlocBuilder<PointsCubit, PointsState>(
-            builder: (context, state) {
-              return customTextField(
-                controller: controller,
-                title: AppStrings.newPoint.tr(),
-                context: context,
-                onSubmitted: (newPoint) {
-                  if (isPlayer1) {
-                    context
-                        .read<PointsCubit>()
-                        .addNewPointForPlayer1(int.parse(newPoint));
-                    if (context.read<PointsCubit>().totalPlayer1 >= 101) {
-                      winnerDialog(
-                          resetFunction:()=>
-                              context.read<PointsCubit>().resetPoints(context),
-                          context: context,
-                          isPlayer1: true);
-                    }
-                  } else {
-                    context
-                        .read<PointsCubit>()
-                        .addNewPointForPlayer2(int.parse(newPoint));
-                    if (context.read<PointsCubit>().totalPlayer2 >= 101) {
-                      winnerDialog(
-                        resetFunction: ()=>
-                            context.read<PointsCubit>().resetPoints(context),
-                        context: context,
-                        isPlayer1: false,
-                      );
-                    }
-                  }
-                  controller?.clear();
-                },
-              );
+          child: customTextField(
+            controller: controller,
+            title: AppStrings.newPoint.tr(),
+            context: context,
+            onSubmitted: (newPoint) {
+              if (isPlayer1) {
+                context.read<PointsCubit>().addNewPointForPlayer1(int.parse(newPoint));
+                if (context.read<PointsCubit>().totalPlayer1 >= 101) {
+                  winnerDialog(
+                      resetFunction: () => context.read<PointsCubit>().resetPoints(context),
+                      context: context,
+                      isPlayer1: true);
+                }
+              } else {
+                context.read<PointsCubit>().addNewPointForPlayer2(int.parse(newPoint));
+                if (context.read<PointsCubit>().totalPlayer2 >= 101) {
+                  winnerDialog(
+                    resetFunction: () => context.read<PointsCubit>().resetPoints(context),
+                    context: context,
+                    isPlayer1: false,
+                  );
+                }
+              }
+              controller?.clear();
             },
           ),
         ),
-        SliverToBoxAdapter(
-            child: customTextTitle(
-                context: context, title: AppStrings.points.tr())),
+        SliverToBoxAdapter(child: customTextTitle(context: context, title: AppStrings.points.tr())),
         BlocBuilder<PointsCubit, PointsState>(
           builder: (context, state) {
             return SliverList(
@@ -86,10 +72,8 @@ Widget totalWidgetsOfAPlayer(
                     ? context.read<PointsCubit>().listOfPointsPlayer1.length
                     : context.read<PointsCubit>().listOfPointsPlayer2.length,
                 (context, index) {
-                  final List<int> pointsPlayer1 =
-                      context.read<PointsCubit>().listOfPointsPlayer1;
-                  final List<int> pointsPlayer2 =
-                      context.read<PointsCubit>().listOfPointsPlayer2;
+                  final List<int> pointsPlayer1 = context.read<PointsCubit>().listOfPointsPlayer1;
+                  final List<int> pointsPlayer2 = context.read<PointsCubit>().listOfPointsPlayer2;
                   return customPoint(
                     isPlayer1: isPlayer1,
                     pointsPlayer1: pointsPlayer1,
@@ -135,30 +119,3 @@ Widget customPoint({
     ),
   );
 }
-/*
-Padding(
-padding: const EdgeInsetsDirectional.all(AppPadding.p8),
-child: Column(
-mainAxisSize: MainAxisSize.min,
-mainAxisAlignment: MainAxisAlignment.spaceAround,
-crossAxisAlignment: CrossAxisAlignment.center,
-children: [
-Padding(
-padding: const EdgeInsetsDirectional.all(AppPadding.p8),
-child: SelectionArea(
-child: Text(
-title,
-textAlign: TextAlign.center,
-style: Theme.of(context).textTheme.displaySmall,
-)),
-),
-Divider(
-thickness: 2,
-indent: 20,
-endIndent: 20,
-color: ColorsManager.primary,
-),
-],
-),
-),
-*/
