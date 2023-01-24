@@ -7,7 +7,6 @@ import 'package:point_counter/presentation/screens/widgets/text_fields.dart';
 import 'package:point_counter/presentation/screens/widgets/texts.dart';
 
 import '../../managers/colors_manager.dart';
-import '../../managers/route_manager.dart';
 import '../../managers/string_manager.dart';
 import '../../managers/value_manager.dart';
 
@@ -43,7 +42,7 @@ Widget totalWidgetsOfAPlayer(
             onSubmitted: (newPoint) {
               if (isPlayer1) {
                 context.read<PointsCubit>().addNewPointForPlayer1(int.parse(newPoint));
-                if (context.read<PointsCubit>().totalPlayer1 >= 101) {
+                if (context.read<PointsCubit>().totalPlayer1 >= context.read<PointsCubit>().limitPoints.toInt()) {
                   winnerDialog(
                       resetFunction: () => context.read<PointsCubit>().resetPoints(context),
                       context: context,
@@ -51,7 +50,7 @@ Widget totalWidgetsOfAPlayer(
                 }
               } else {
                 context.read<PointsCubit>().addNewPointForPlayer2(int.parse(newPoint));
-                if (context.read<PointsCubit>().totalPlayer2 >= 101) {
+                if (context.read<PointsCubit>().totalPlayer2 >= context.read<PointsCubit>().limitPoints.toInt()) {
                   winnerDialog(
                     resetFunction: () => context.read<PointsCubit>().resetPoints(context),
                     context: context,

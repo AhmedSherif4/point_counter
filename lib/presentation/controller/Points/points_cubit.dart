@@ -1,18 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../managers/route_manager.dart';
+import '../../../Application/app_preferences.dart';
 
 part 'points_state.dart';
 
 class PointsCubit extends Cubit<PointsState> {
-  PointsCubit() : super(PointsInitial());
+  final AppPreferences _appPreferences;
+
+  PointsCubit(this._appPreferences) : super(PointsInitial());
 
 
   List<int> listOfPointsPlayer1 = [];
   int totalPlayer1 = 0;
   List<int> listOfPointsPlayer2 = [];
   int totalPlayer2 = 0;
+  double  limitPoints =100.0;
+
+  setLimitPoints(double newLimitPoints){
+    _appPreferences.setLimitPoints(newLimitPoints);
+    limitPoints = _appPreferences.getLimitPoints();
+   emit(ChangeLimitPoints());
+  }
+
 
   void addNewPointForPlayer1(int newPointForPlayer1) {
     listOfPointsPlayer1.add(newPointForPlayer1);

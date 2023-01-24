@@ -13,6 +13,7 @@ class AppStrings {
   static const String congratsPlayer2  = 'congrats_player2';
   static const String newGame = 'new_game';
   static const String reset = 'reset';
+  static const String limitPoints = 'limit_points';
 
 
   // app string
