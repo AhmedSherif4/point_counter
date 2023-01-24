@@ -13,5 +13,5 @@ Future<void> initialAppModule()async{
   instanceGetIt.registerLazySingleton<SharedPreferences>(()=>sharedPreferences);
   instanceGetIt.registerLazySingleton<AppPreferences>(()=> AppPreferences(instanceGetIt()));
   instanceGetIt.registerFactory<AppSettingsCubit>(()=>AppSettingsCubit(instanceGetIt()));
-  instanceGetIt.registerFactory<PointsCubit>(()=>PointsCubit());
+  instanceGetIt.registerFactory<PointsCubit>(()=>PointsCubit(instanceGetIt()));
 }

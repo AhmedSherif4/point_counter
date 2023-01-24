@@ -10,12 +10,14 @@ import 'package:point_counter/presentation/managers/value_manager.dart';
 import '../../controller/app_settings/app_settings_cubit.dart';
 import '../../managers/colors_manager.dart';
 import '../widgets/dialogs.dart';
+import '../widgets/text_fields.dart';
 import '../widgets/widgets.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
 
   final TextEditingController textControllerPlayerOne = TextEditingController();
+  final TextEditingController textControllerLimitPoints = TextEditingController();
 
   final TextEditingController textControllerPlayerTwo = TextEditingController();
 
@@ -47,27 +49,67 @@ class MainScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Expanded(
-              child: totalWidgetsOfAPlayer(
-                context: context,
-                controller: textControllerPlayerOne,
-                isPlayer1: true,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: BlocBuilder<PointsCubit, PointsState>(builder: (context, state) {
+                      final limitPoints = context.read<PointsCubit>().limitPoints;
+                      print(limitPoints);
+                      return Text(
+                        '${AppStrings.limitPoints.tr()} : $limitPoints',
+                        style: Theme.of(context).textTheme.displayMedium,
+                        softWrap: true,
+                      );
+                    }),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: customTextField(
+                      controller: textControllerLimitPoints,
+                      title: AppStrings.limitPoints.tr(),
+                      context: context,
+                      onSubmitted: (newLimitPoints) {
+                        print(double.parse(newLimitPoints));
+                        context.read<PointsCubit>().setLimitPoints(double.parse(newLimitPoints));
+                        },
+                    ),
+                  ),
+                ),
+              ],
             ),
-            VerticalDivider(
-              width: AppSize.s8,
-              thickness: AppSize.s2,
-              color: ColorsManager.primary,
-            ),
-            Expanded(
-              child: totalWidgetsOfAPlayer(
-                context: context,
-                controller: textControllerPlayerTwo,
-                isPlayer1: false,
+            Flexible(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: totalWidgetsOfAPlayer(
+                      context: context,
+                      controller: textControllerPlayerOne,
+                      isPlayer1: true,
+                    ),
+                  ),
+                  VerticalDivider(
+                    width: AppSize.s8,
+                    thickness: AppSize.s2,
+                    color: ColorsManager.primary,
+                  ),
+                  Expanded(
+                    child: totalWidgetsOfAPlayer(
+                      context: context,
+                      controller: textControllerPlayerTwo,
+                      isPlayer1: false,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
