@@ -1,6 +1,6 @@
 # Point Counter
 
-A project for counting the number of points for two players, when one of the players reach to Limit Points -which you select it-, the application will declare the winner.
+A project for counting the number of points for two players, when one of the players reaches the Limit Points -which you select-, the application will declare the winner.
 
 ### using:
 
