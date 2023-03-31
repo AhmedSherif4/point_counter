@@ -10,7 +10,7 @@ final ThemeData lightThemeData = ThemeData.light(useMaterial3: true).copyWith(
   useMaterial3: true,
   scaffoldBackgroundColor: ColorsManager.third,
   primaryColor: ColorsManager.primary,
-  backgroundColor: ColorsManager.third,
+  colorScheme: ColorScheme.fromSwatch(backgroundColor: ColorsManager.third),
   appBarTheme: AppBarTheme(
     centerTitle: true,
     elevation: AppSize.s4,
@@ -22,7 +22,8 @@ final ThemeData lightThemeData = ThemeData.light(useMaterial3: true).copyWith(
       systemNavigationBarColor: ColorsManager.white,
     ),
     color: ColorsManager.primary,
-    titleTextStyle: getRegularTextStyle?.copyWith(fontSize: FontSize.s22, color: Colors.black),
+    titleTextStyle: getRegularTextStyle?.copyWith(
+        fontSize: FontSize.s22, color: Colors.black),
   ),
   textTheme: TextTheme(
     displayLarge: getSemiBoldStyle?.copyWith(
@@ -39,15 +40,13 @@ final ThemeData lightThemeData = ThemeData.light(useMaterial3: true).copyWith(
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: ColorsManager.primary,
-
-
   ),
 );
 
 final ThemeData darkThemeData = ThemeData.dark(useMaterial3: true).copyWith(
   scaffoldBackgroundColor: ColorsManager.black,
   primaryColor: ColorsManager.primary,
-  backgroundColor: ColorsManager.black,
+  colorScheme: ColorScheme.fromSwatch(backgroundColor: ColorsManager.primary),
   appBarTheme: AppBarTheme(
     centerTitle: true,
     elevation: AppSize.s4,
@@ -76,7 +75,5 @@ final ThemeData darkThemeData = ThemeData.dark(useMaterial3: true).copyWith(
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: ColorsManager.primary,
-
   ),
-
 );
