@@ -6,7 +6,6 @@ A project for counting the number of points for two players, when one of the pla
 
 #### BLoC pattern, Clean Architecture, Localization and Dart/Light mode
 
-
 ## Screens of the Project:
 
 ### Splash Screen:
